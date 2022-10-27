@@ -42,10 +42,9 @@ I have the most problem with the Delete method since I was struggling on figurin
 
 ## Demo
 
-[Screen shots of deployed page] (/Users/mohammadrezamemar/Note-Taker/Img-Gif/Screen Shot 2022-10-27 at 1.12.20 PM.png)
-(/Users/mohammadrezamemar/Note-Taker/Img-Gif/Screen Shot 2022-10-27 at 1.12.40 PM.png)
-
-![](notegif.gif)
+![](./Img-Gif/Screen%20Shot%202022-10-27%20at%201.12.20%20PM.png)
+![](./Img-Gif/Screen%20Shot%202022-10-27%20at%201.12.40%20PM.png)
+![](./Img-Gif/Screen%20Recording%202022-10-27%20at%201.24.36%20PM.mov)
 
 ## Author
 
