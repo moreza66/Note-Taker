@@ -6,7 +6,7 @@
 
 ---
 
-## Deployed link : https://aqueous-everglades-38921.herokuapp.com/
+## Deployed link : https://mo-note-taker.herokuapp.com/notes
 
 ---
 
