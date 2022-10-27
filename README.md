@@ -42,6 +42,9 @@ I have the most problem with the Delete method since I was struggling on figurin
 
 ## Demo
 
+[Screen shots of deployed page] (/Users/mohammadrezamemar/Note-Taker/Img-Gif/Screen Shot 2022-10-27 at 1.12.20 PM.png)
+(/Users/mohammadrezamemar/Note-Taker/Img-Gif/Screen Shot 2022-10-27 at 1.12.40 PM.png)
+
 ![](notegif.gif)
 
 ## Author
