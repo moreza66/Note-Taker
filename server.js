@@ -30,9 +30,10 @@ app.post("/api/notes", function (req, res) {
     }
     notes = JSON.parse(notes)
 
-    var id = notes[notes.length - 1].id + 1
-    var newNote = { title: req.body.title, text: req.body.text, id: id }
-    var activeNote = notes.concat(newNote)
+    let id = notes[notes.length - 1].id + 1
+
+    let newNote = { title: req.body.title, text: req.body.text, id: id }
+    let activeNote = notes.concat(newNote)
 
     fs.writeFile(__dirname + "/db/db.json", JSON.stringify(activeNote), function (error, data) {
       if (error) {
@@ -50,14 +51,12 @@ app.get("/api/notes", function (req, res) {
     if (error) {
       return console.log(error)
     }
-    console.log("This is Notes", data)
     res.json(JSON.parse(data))
   })
 });
 
 app.delete("/api/notes/:id", function (req, res) {
-  const noteId = JSON.parse(req.params.id)
-  console.log(noteId)
+  const noteId = req.params.id
   fs.readFile(__dirname + "/db/db.json", 'utf8', function (error, notes) {
     if (error) {
       return console.log(error)

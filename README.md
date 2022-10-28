@@ -42,9 +42,8 @@ I have the most problem with the Delete method since I was struggling on figurin
 
 ## Demo
 
-![](./Img-Gif/Screen%20Shot%202022-10-27%20at%201.12.20%20PM.png)
-![](./Img-Gif/Screen%20Shot%202022-10-27%20at%201.12.40%20PM.png)
-![](./Img-Gif/Screen%20Recording%202022-10-27%20at%201.24.36%20PM.mov)
+![](./Img-Gif/Screen%20Shot%202022-10-27%20at%203.28.43%20PM.png)
+![](./Img-Gif/Screen%20Shot%202022-10-27%20at%203.33.00%20PM.png)
 
 ## Author
 
