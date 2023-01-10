@@ -6,7 +6,7 @@
 
 ---
 
-## Deployed link :
+## Deployed link :https://fierce-everglades-11454.herokuapp.com/notes
 
 ---
 
