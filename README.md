@@ -6,7 +6,7 @@
 
 ---
 
-## Deployed link : https://mo-note-taker.herokuapp.com/notes
+## Deployed link :
 
 ---
 

@@ -1,100 +1,106 @@
-// Dependencies
+//======================================================================
+// Welcome to my Note-Taker, based on Express.js.
+
+// Below are my dependencies;
+//======================================================================
 const express = require("express");
 const path = require("path");
-const fs = require("fs")
+const fs = require("fs");
+let notes = require("./db/db.json")
 
-// Sets up the Express App
+//======================================================================
+// This sets up the Express App
+//======================================================================
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-// Sets up the Express app to handle data parsing
+//==============================================================================
+// This sets up data parsing-- Express will interpret it/format data as JSON.
+// This is required for API calls!
+//==============================================================================
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
 
-// HTML Routes
+currentID = notes.length;
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
+//==============================================================================
+// On page load, it should start with index.html. First get it and then listen.
+//==============================================================================
+// Since the GET and POST functions grab from the same route, we can set it once up here.
 
-app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "/public/notes.html"));
+app.get("/api/notes", function (req, res) {
 
+    return res.json(notes);
 });
 
 app.post("/api/notes", function (req, res) {
-  fs.readFile(__dirname + "/db/db.json", 'utf8', function (error, notes) {
-    if (error) {
-      return console.log(error)
-    }
-    notes = JSON.parse(notes)
+    var newNote = req.body;
 
-    let id = notes[notes.length - 1].id + 1
+    newNote["id"] = currentID +1;
+    currentID++;
+    console.log(newNote);
 
-    let newNote = { title: req.body.title, text: req.body.text, id: id }
-    let activeNote = notes.concat(newNote)
+    notes.push(newNote);
 
-    fs.writeFile(__dirname + "/db/db.json", JSON.stringify(activeNote), function (error, data) {
-      if (error) {
-        return error
-      }
-      console.log(activeNote)
-      res.json(activeNote);
-    })
-  })
-})
+    writeFileSync();
 
-// API Route | "Get request"
-app.get("/api/notes", function (req, res) {
-  fs.readFile(__dirname + "/db/db.json", 'utf8', function (error, data) {
-    if (error) {
-      return console.log(error)
-    }
-    res.json(JSON.parse(data))
-  })
+    return res.status(200).end();
 });
 
 app.delete("/api/notes/:id", function (req, res) {
-  const noteId = req.params.id
-  fs.readFile(__dirname + "/db/db.json", 'utf8', function (error, notes) {
-    if (error) {
-      return console.log(error)
-    }
-    notes = JSON.parse(notes)
+    res.send('Got a DELETE request at /api/notes/:id')
+// This allows the test note to be the original note.
+    const id = req.params.id;
 
-    notes = notes.filter(val => val.id !== noteId)
+    let lowestId = notes.filter(function (less) {
+        return less.id < id;
+    });
 
-    fs.writeFile(__dirname + "/db/db.json", JSON.stringify(notes), function (error, data) {
-      if (error) {
-        return error
-      }
-      res.json(notes)
-    })
-  })
+    let highestId = notes.filter(function (greater) {
+        return greater.id > id;
+    });
+
+    notes = lowestId.concat(highestId);
+
+    writeFileSync();
 })
 
-app.put("/api/notes/:id", function(req, res) {
-  const noteId = JSON.parse(req.params.id)
-  console.log(noteId)
-  fs.readFile(__dirname + "db/db.json", "utf8", function(error, notes) {
-    if (error ){
-      return console.log(error)
-    }
-    notes.JSONparse(notes)
+//==============================================================================
+// Gotta link to my assets!
 
-    notes = notes.filter(val => val.id !== noteId)
+app.use(express.static("public"));
 
-    fs.writeFile(__dirname +"db/db.json", JSON.stringify(notes), function (error, data) {
-      if (error) {
-        return error
-      }
-      res.json(notes)
-    })
-  })
-})
 
-// Listening
+//==============================================================================
+// Gotta link to my assets!
+
+app.get("/notes", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+
+
+
+
+function writeFileSync() {
+    fs.writeFile("db/db.json", JSON.stringify(notes), function (err) {
+        if (err) {
+            console.log("error")
+            return console.log(err);
+        }
+
+        console.log("Success!");
+    });
+}
+
+//make the app listen to the server
+
 app.listen(PORT, function () {
-  console.log("App listening on PORT " + PORT);
+  console.log("API server now listening to port" + PORT);
 });
